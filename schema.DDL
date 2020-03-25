@@ -41,7 +41,11 @@ create table Leader(
 
 /*  table that records all monitors*/ 
 create table Monitor(
-	name text,
+	name text primary key
+);
+
+create table MonitorPrice(
+	name text references Monitor,
 	timing TimePeriod not null,
 	diveType DiveType not null,
 	price Real not null,
@@ -50,7 +54,7 @@ create table Monitor(
 
 /* table that tells the capacity of each monitor.*/ 
 create table MonitorCapacity(
-	name text references Monitor(name),
+	name text references Monitor,
 	diveType DiveType not null,
 	capacity Capacity,
 	primary key (name, diveType)
@@ -66,19 +70,18 @@ create table DiveSite(
 	nightMaxima integer not null,
 	caveMaxima integer not null, 
 	deeperMaxima integer not null,
-	constrain diffMaxima
+	constraint diffMaxima
 		check (dayMaxima > nightMaxima) and 
 		(dayMaxima > cave) and (dayMaxima > deeperMaxima)
 );
 
 /* The additional services provided by sites.*/ 
 create table DiveSiteServices(
-	name text references DiveSite(name), 
+	name text primary key references DiveSite(name), 
 	mask boolean,
 	regulator boolean,
 	fins boolean,
 	diveComputer boolean
-	primary key(name)
 );
 
 /*  Price for each additional services provided by sites */ 
@@ -87,7 +90,7 @@ create table DiveSiteServicesFee(
 	mask Real,
 	regulator Real,
 	fins Real,
-	diveComputer Real
+	diveComputer Real, 
 	primary key (name)
 );
 
@@ -113,7 +116,7 @@ create table Booking(
 
 /* table about how divers of each diving events are grouped. */ 
 create table DiveEvent(
-	diverID references Diver(ID),
+	diverID integer references Diver(ID),
 	day date references Booking(day),
 	timePeriod TimePeriod references Booking(timePeriod),
 	leadID references Leader(ID),
