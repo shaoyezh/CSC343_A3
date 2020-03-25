@@ -14,15 +14,6 @@ create domain TimePeriod as text
 create domain DiveType as text
 	check (value in ('open water', 'cave diving', 'deeper than 30 meters'));
 
-/*  user define type for Monitor Capacity of each site*/ 
-create domain Capacity as int
-	default 0
-	check (value >= 0);
-
-/*  user define type for Rating system*/ 
-create domain Rating as int
-	check (value >= 0 and value <= 5);
-
 /*  table that records all divers*/ 
 create table Diver(
 	ID integer primary key not null,
@@ -56,8 +47,9 @@ create table MonitorPrice(
 create table MonitorCapacity(
 	name text references Monitor,
 	diveType DiveType not null,
-	capacity Capacity,
-	primary key (name, diveType)
+	capacity int,
+	primary key (name, diveType),
+	check capacity >= 0
 );
 
 /* information about each dive site*/ 
@@ -70,6 +62,8 @@ create table DiveSite(
 	nightMaxima integer not null,
 	caveMaxima integer not null, 
 	deeperMaxima integer not null,
+	diveFee integer not null,
+	check diveFee >= 0
 	constraint diffMaxima
 		check ((dayMaxima > nightMaxima) and 
 		(dayMaxima > caveMaxima) and (dayMaxima > deeperMaxima))
@@ -125,17 +119,19 @@ create table DiveEvent(
 /*  Rate of site*/ 
 create table SiteRate(
 	diverID integer references Diver(ID),
-	site text ,
-	siteRate Rating, 
-	primary key(diverID, site)
+	site text not null,
+	siteRate int not null,
+	primary key(diverID, site), 
+	check (siteRate >= 0 and siteRate <= 5)
 );
 
 /*  Rate fo monitor*/ 
 create table MonitorRate(
 	leadID integer references Leader(ID),
 	monitor text references Monitor,
-	monitorRate Rating not null,
-	primary key(leadID, monitor)
+	monitorRate int not null,
+	primary key(leadID, monitor),
+	check (monitorRate >= 0 and monitorRate <= 5)
 );
 
 
