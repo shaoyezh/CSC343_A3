@@ -45,15 +45,15 @@ create table Monitor(
 	timing TimePeriod not null,
 	diveType DiveType not null,
 	price Real not null,
-	primary key(name, timing, diveType)
+	primary key (name, timing, diveType)
 );
 
 /* table that tells the capacity of each monitor.*/ 
 create table MonitorCapacity(
-	ID integer references Monitor(ID),
+	name text references Monitor(name),
 	diveType DiveType not null,
 	capacity Capacity,
-	primary key(ID, diveType)
+	primary key (name, diveType)
 );
 
 /* information about each dive site*/ 
@@ -67,8 +67,8 @@ create table DiveSite(
 	caveMaxima integer not null, 
 	deeperMaxima integer not null,
 	constrain diffMaxima
-		check dayMaxima > nightMaxima and 
-		dayMaxima > cave and dayMaxima > deeperMaxima
+		check (dayMaxima > nightMaxima) and 
+		(dayMaxima > cave) and (dayMaxima > deeperMaxima)
 );
 
 /* The additional services provided by sites.*/ 
@@ -88,7 +88,7 @@ create table DiveSiteServicesFee(
 	regulator Real,
 	fins Real,
 	diveComputer Real
-	primary key(name)
+	primary key (name)
 );
 
 /*  THe free serviese provided */ 
@@ -98,7 +98,7 @@ create table DiveSiteFreeServices(
 	snacks boolean,
 	showers boolean,
 	towel boolean,
-	primary key(name)
+	primary key (name)
 );
 
 /*  all booking information*/ 
@@ -108,7 +108,7 @@ create table Booking(
 	timePeriod TimePeriod,
 	site text references DiveSite(name),
 	monitor text references Monitor(name),
-	primary key(leader, day, timePeriod)
+	primary key (leader, day, timePeriod)
 );
 
 /* table about how divers of each diving events are grouped. */ 
@@ -117,7 +117,7 @@ create table DiveEvent(
 	day date references Booking(day),
 	timePeriod TimePeriod references Booking(timePeriod),
 	leadID references Leader(ID),
-	primary key(diverID, day, timePeriod)
+	primary key (diverID, day, timePeriod)
 );
 
 /*  Rate of site*/ 
@@ -126,7 +126,7 @@ create table SiteRate(
 	site text ,
 	siteRate Rating, 
 	primary key(diverID, site)
-)
+);
 
 /*  Rate fo monitor*/ 
 create table MonitorRate(
@@ -134,6 +134,6 @@ create table MonitorRate(
 	monitor text references Monitor,
 	monitorRate Rating not null,
 	primary key(leadID, monitor)
-)
+);
 
 
