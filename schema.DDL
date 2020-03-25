@@ -71,8 +71,8 @@ create table DiveSite(
 	caveMaxima integer not null, 
 	deeperMaxima integer not null,
 	constraint diffMaxima
-		check (dayMaxima > nightMaxima) and 
-		(dayMaxima > cave) and (dayMaxima > deeperMaxima)
+		check ((dayMaxima > nightMaxima) and 
+		(dayMaxima > cave) and (dayMaxima > deeperMaxima))
 );
 
 /* The additional services provided by sites.*/ 
@@ -119,7 +119,7 @@ create table DiveEvent(
 	diverID integer references Diver(ID),
 	day date references Booking(day),
 	timePeriod TimePeriod references Booking(timePeriod),
-	leadID references Leader(ID),
+	leadID integer references Leader(ID),
 	primary key (diverID, day, timePeriod)
 );
 
