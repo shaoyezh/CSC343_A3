@@ -3,7 +3,7 @@ create schema wetworldschema;
 set search_path to wetworldschema;
 
 /* user define type for certifacte */
-create domain Certificate as var(4)
+create domain Certificate as varchar(4)
 	check (value in ('NAUI','CMAS','PADI'));
 
 /* user define type for time*/ 
@@ -35,13 +35,13 @@ create table Diver(
 
 /*  table that record all lead.*/ 
 create table Leader(
-	ID integer primary key references Diver(ID), # foreign key constrain
+	ID integer primary key references Diver(ID),
 	creditCard text not null
 );
 
 /*  table that records all monitors*/ 
 create table Monitor(
-	name text
+	name text,
 	timing TimePeriod not null,
 	diveType DiveType not null,
 	price Real not null,
