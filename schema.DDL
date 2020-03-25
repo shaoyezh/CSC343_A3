@@ -106,21 +106,20 @@ create table DiveSiteFreeServices(
 
 /*  all booking information*/ 
 create table Booking(
+	ID integer primary key,
 	leader integer references Leader(ID),
 	day date,
 	timePeriod TimePeriod,
 	site text references DiveSite(name),
-	monitor text references Monitor(name),
-	primary key (leader, day, timePeriod)
+	monitor text references Monitor(name)
 );
 
 /* table about how divers of each diving events are grouped. */ 
 create table DiveEvent(
 	diverID integer references Diver(ID),
-	day date references Booking(day),
-	timePeriod TimePeriod references Booking(timePeriod),
 	leadID integer references Leader(ID),
-	primary key (diverID, day, timePeriod)
+	bookingID integer references Booking(ID),
+	primary key (diverID, leadID, bookingID)
 );
 
 /*  Rate of site*/ 
