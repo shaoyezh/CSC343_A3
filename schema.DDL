@@ -2,28 +2,28 @@ drop schema if exists wetworldschema cascade;
 create schema wetworldschema;
 set search_path to wetworldschema;
 
-# user define type for certifacte
+/* user define type for certifacte */
 create domain Certificate as var(4)
 	check (value in ('NAUI','CMAS','PADI'));
 
-# user define type for time 
+/* user define type for time*/ 
 create domain TimePeriod as text
 	check (value in ('morning', 'afternoon', 'night'));
 
-# user define type for dive type
+/*  user define type for dive type */ 
 create domain DiveType as text
 	check (value in ('open water', 'cave diving', 'deeper than 30 meters'));
 
-# user define type for Monitor Capacity of each site
+/*  user define type for Monitor Capacity of each site*/ 
 create domain Capacity as int
 	default 0
 	check (value >= 0);
 
-# user define type for Rating system
+/*  user define type for Rating system*/ 
 create domain Rating as int
 	check (value >= 0 and value <= 5);
 
-# table that records all divers
+/*  table that records all divers*/ 
 create table Diver(
 	ID integer primary key not null,
 	certificate Certificate not null,
@@ -33,13 +33,13 @@ create table Diver(
 	email text not null
 );
 
-# table that record all lead.
+/*  table that record all lead.*/ 
 create table Leader(
 	ID integer primary key references Diver(ID), # foreign key constrain
 	creditCard text not null
 );
 
-# table that records all monitors
+/*  table that records all monitors*/ 
 create table Monitor(
 	name text
 	timing TimePeriod not null,
@@ -48,7 +48,7 @@ create table Monitor(
 	primary key(name, timing, diveType)
 );
 
-# table that tells the capacity of each monitor.
+/* table that tells the capacity of each monitor.*/ 
 create table MonitorCapacity(
 	ID integer references Monitor(ID),
 	diveType DiveType not null,
@@ -56,7 +56,7 @@ create table MonitorCapacity(
 	primary key(ID, diveType)
 );
 
-# information about each dive site
+/* information about each dive site*/ 
 create table DiveSite(
 	name text primary key,
 	openWater boolean not null, 
@@ -71,7 +71,7 @@ create table DiveSite(
 		dayMaxima > cave and dayMaxima > deeperMaxima
 );
 
-# The additional services provided by sites.
+/* The additional services provided by sites.*/ 
 create table DiveSiteServices(
 	name text references DiveSite(name), 
 	mask boolean,
@@ -81,7 +81,7 @@ create table DiveSiteServices(
 	primary key(name)
 );
 
-# Price for each additional services provided by sites 
+/*  Price for each additional services provided by sites */ 
 create table DiveSiteServicesFee(
 	name text references DiveSite(name), 
 	mask Real,
@@ -91,7 +91,7 @@ create table DiveSiteServicesFee(
 	primary key(name)
 );
 
-# THe free serviese provided 
+/*  THe free serviese provided */ 
 create table DiveSiteFreeServices(
 	name text references DiveSite(name),
 	video boolean,
@@ -101,7 +101,7 @@ create table DiveSiteFreeServices(
 	primary key(name)
 );
 
-# all booking information
+/*  all booking information*/ 
 create table Booking(
 	leader integer references Leader(ID),
 	day date,
@@ -111,7 +111,7 @@ create table Booking(
 	primary key(leader, day, timePeriod)
 );
 
-# table about how divers of each diving events are grouped. 
+/* table about how divers of each diving events are grouped. */ 
 create table DiveEvent(
 	diverID references Diver(ID),
 	day date references Booking(day),
@@ -120,7 +120,7 @@ create table DiveEvent(
 	primary key(diverID, day, timePeriod)
 );
 
-# Rate of site
+/*  Rate of site*/ 
 create table SiteRate(
 	diverID integer references Diver(ID),
 	site text ,
@@ -128,7 +128,7 @@ create table SiteRate(
 	primary key(diverID, site)
 )
 
-# Rate fo monitor
+/*  Rate fo monitor*/ 
 create table MonitorRate(
 	leadID integer references Leader(ID),
 	monitor text references Monitor,
