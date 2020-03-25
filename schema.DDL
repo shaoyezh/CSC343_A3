@@ -72,7 +72,7 @@ create table DiveSite(
 	deeperMaxima integer not null,
 	constraint diffMaxima
 		check ((dayMaxima > nightMaxima) and 
-		(dayMaxima > cave) and (dayMaxima > deeperMaxima))
+		(dayMaxima > caveMaxima) and (dayMaxima > deeperMaxima))
 );
 
 /* The additional services provided by sites.*/ 
