@@ -63,7 +63,7 @@ create table DiveSite(
 	caveMaxima integer not null, 
 	deeperMaxima integer not null,
 	diveFee integer not null,
-	check (diveFee >= 0)
+	check (diveFee >= 0),
 	constraint diffMaxima
 		check ((dayMaxima > nightMaxima) and 
 		(dayMaxima > caveMaxima) and (dayMaxima > deeperMaxima))
