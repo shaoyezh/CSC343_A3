@@ -1,4 +1,4 @@
-Insert into DiveSiteInfo values
+Insert into DiveSite values
 ('Marine', 10, 8, 8, 8, 10),
 ('Widow Maker', 10, 8, 8, 8, 20),
 ('Crystal Bay', 10, 8, 8, 8, 15),

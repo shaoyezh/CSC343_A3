@@ -29,7 +29,7 @@ create table Leader(
 );
 
 /* information about each dive site*/ 
-create table DiveSiteInfo(
+create table DiveSite(
 	name text primary key,
 	dayMaxima integer not null,
 	nightMaxima integer not null,
@@ -43,7 +43,7 @@ create table DiveSiteInfo(
 );
 
 create table SiteDiveType(
-	name text,
+	name text references DiveSite(name),
 	diveType DiveType,
 	primary key(name, diveType)
 );
