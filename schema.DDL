@@ -79,23 +79,24 @@ create table MonitorCapacity(
 -- 	diveComputer boolean
 -- );
 
-/*  Price for each additional services provided by sites */ 
+/*  Price for each additional services provided by sites,
+charge 0 if that service is not provided*/ 
 create table DiveSiteServicesFee(
 	name text references DiveSite(name), 
-	mask Real,
-	regulator Real,
-	fins Real,
-	diveComputer Real, 
+	mask Real not null,
+	regulator Real not null,
+	fins Real not null,
+	diveComputer Real not null, 
 	primary key (name)
 );
 
 /*  THe free serviese provided */ 
 create table DiveSiteFreeServices(
 	name text references DiveSite(name),
-	video boolean,
-	snacks boolean,
-	showers boolean,
-	towel boolean,
+	video boolean not null,
+	snacks boolean not null,
+	showers boolean not null,
+	towel boolean not null,
 	primary key (name)
 );
 
@@ -103,8 +104,8 @@ create table DiveSiteFreeServices(
 create table Booking(
 	ID integer primary key,
 	leader text references Leader(name),
-	day date,
-	timePeriod TimePeriod,
+	day date not null,
+	timePeriod TimePeriod not null,
 	site text references DiveSite(name),
 	diveType DiveType,
 	monitor text references Monitor(name)
