@@ -56,7 +56,7 @@ create table MonitorPrice(
 	timing TimePeriod not null,
 	diveType DiveType not null,
 	price Real not null,
-	primary key (name, timing, diveType)
+	primary key (name,site, timing, diveType)
 );
 
 /* table that tells the capacity of each monitor.*/ 

@@ -53,13 +53,6 @@ Insert into MonitorPrice values
 ('John', 'Marine', 'morning', 'cave dive', 15),
 ('Ben', 'Widow Maker', 'morning', 'cave dive',20);
 
-Insert into MonitorRate values
-(1, 2),
-(2, 0),
-(3, 5),
-(5, 1),
-(6, 0),
-(7, 2);
 
 Insert into Booking values
 (1, 'Micheal', '2019-07-20', 'morning','Widow Maker','open water','Maria'),
@@ -92,7 +85,13 @@ Insert into DiveEvent values
 ('Andy', 6),
 ('Andy', 7);
 
-
+Insert into MonitorRate values
+(1, 2),
+(2, 0),
+(3, 5),
+(5, 1),
+(6, 0),
+(7, 2);
 
 
 
