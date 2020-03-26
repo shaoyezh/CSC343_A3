@@ -12,44 +12,20 @@ create domain TimePeriod as text
 
 /*  user define type for dive type */ 
 create domain DiveType as text
-	check (value in ('open water', 'cave diving', 'deeper than 30 meters'));
+	check (value in ('open water', 'cave dive', 'deeper than 30 meters'));
 
 /*  table that records all divers*/ 
 create table Diver(
-	ID integer primary key not null,
+	name text primary key not null, 
 	certificate Certificate not null,
-
-	age integer not null 
-		check (age >= 16),
+	born date not null,
 	email text not null
 );
 
 /*  table that record all lead.*/ 
 create table Leader(
-	ID integer primary key references Diver(ID),
+	name text primary key references Diver(name),
 	creditCard text not null
-);
-
-/*  table that records all monitors*/ 
-create table Monitor(
-	name text primary key
-);
-
-create table MonitorPrice(
-	name text references Monitor,
-	timing TimePeriod not null,
-	diveType DiveType not null,
-	price Real not null,
-	primary key (name, timing, diveType)
-);
-
-/* table that tells the capacity of each monitor.*/ 
-create table MonitorCapacity(
-	name text references Monitor,
-	diveType DiveType not null,
-	capacity int,
-	primary key (name, diveType),
-	check (capacity >= 0)
 );
 
 /* information about each dive site*/ 
@@ -69,14 +45,39 @@ create table DiveSite(
 		(dayMaxima > caveMaxima) and (dayMaxima > deeperMaxima))
 );
 
-/* The additional services provided by sites.*/ 
-create table DiveSiteServices(
-	name text primary key references DiveSite(name), 
-	mask boolean,
-	regulator boolean,
-	fins boolean,
-	diveComputer boolean
+/*  table that records all monitors*/ 
+create table Monitor(
+	name text primary key
 );
+
+create table MonitorPrice(
+	name text references Monitor,
+	site text references DiveSite(name)
+	timing TimePeriod not null,
+	diveType DiveType not null,
+	price Real not null,
+	primary key (name, timing, diveType)
+);
+
+/* table that tells the capacity of each monitor.*/ 
+create table MonitorCapacity(
+	name text references Monitor,
+	openWater int not null,
+	cave int not null, 
+	deepWater int not null,
+	primary key (name),
+	check (openWater >= 0 and cave >= 0 and deepWater >= 0)
+);
+
+
+-- /* The additional services provided by sites.*/ 
+-- create table DiveSiteServices(
+-- 	name text primary key references DiveSite(name), 
+-- 	mask boolean,
+-- 	regulator boolean,
+-- 	fins boolean,
+-- 	diveComputer boolean
+-- );
 
 /*  Price for each additional services provided by sites */ 
 create table DiveSiteServicesFee(
@@ -101,24 +102,24 @@ create table DiveSiteFreeServices(
 /*  all booking information*/ 
 create table Booking(
 	ID integer primary key,
-	leader integer references Leader(ID),
+	leader references Leader(name),
 	day date,
 	timePeriod TimePeriod,
 	site text references DiveSite(name),
+	diveType DiveType,
 	monitor text references Monitor(name)
 );
 
 /* table about how divers of each diving events are grouped. */ 
 create table DiveEvent(
-	diverID integer references Diver(ID),
-	leadID integer references Leader(ID),
+	diver text references Diver(name),
 	bookingID integer references Booking(ID),
-	primary key (diverID, leadID, bookingID)
+	primary key (diverID, bookingID)
 );
 
 /*  Rate of site*/ 
 create table SiteRate(
-	diverID integer references Diver(ID),
+	name text primary key references Diver(name),
 	site text not null,
 	siteRate int not null,
 	primary key(diverID, site), 
@@ -127,10 +128,8 @@ create table SiteRate(
 
 /*  Rate fo monitor*/ 
 create table MonitorRate(
-	leadID integer references Leader(ID),
-	monitor text references Monitor,
+	bookingID int primary key references Booking(ID),
 	monitorRate int not null,
-	primary key(leadID, monitor),
 	check (monitorRate >= 0 and monitorRate <= 5)
 );
 
