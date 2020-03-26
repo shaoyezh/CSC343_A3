@@ -66,6 +66,15 @@ Insert into Booking values
 (6, 'Andy', '2019-07-23', 'morning', 'Widow Maker', 'cave dive', 'Ben'),
 (7, 'Andy', '2019-07-24', 'morning', 'Widow Maker', 'cave dive', 'Ben');
 
+Insert into SiteMonitor values
+('Marine', 'Maria'),
+('Widow Maker', 'Maria'),
+('Crystal Bay', 'Maria'),
+('Marine', 'John'),
+('Crystal Bay', 'John'),
+('Widow Maker', 'Ben');
+
+
 Insert into DiveEvent values
 ('Micheal', 1),
 ('Dwight', 1),

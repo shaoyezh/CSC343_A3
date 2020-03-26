@@ -69,6 +69,11 @@ create table MonitorCapacity(
 	check (openWater >= 0 and cave >= 0 and deepWater >= 0)
 );
 
+create table SiteMonitor(
+	site text references DiveSite(name),
+	monitor text references Monitor,
+	primary key(site, monitor)
+);
 
 -- /* The additional services provided by sites.*/ 
 -- create table DiveSiteServices(
