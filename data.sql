@@ -1,9 +1,19 @@
-Insert into DiveSite values
-('Marine', true, true, true, 10, 8, 8, 8, 10),
-('Widow Maker', true, true, true, 10, 8, 8, 8, 20),
-('Crystal Bay', true, true, true, 10, 8, 8, 8, 15),
-('Bolong', true, true, true, 10, 8, 8, 8, 15);
+Insert into DiveSiteInfo values
+('Marine', 10, 8, 8, 8, 10),
+('Widow Maker', 10, 8, 8, 8, 20),
+('Crystal Bay', 10, 8, 8, 8, 15),
+('Bolong', 10, 8, 8, 8, 15);
 
+Insert into SiteDiveType values
+('Marine', 'open water'),
+('Marine', 'cave dive'),
+('Marine', 'deeper than 30 meters'),
+('Widow Maker', 'open water'),
+('Widow Maker', 'cave dive'),
+('Widow Maker', 'deeper than 30 meters'),
+('Crystal Bay', 'open water'),
+('Crystal Bay', 'cave dive'),
+('Bolong', 'open water');
 -- Insert into DiveSiteServices values
 -- ('Marine', true, false, true, false),
 -- ('Widow Maker', true, false, true, false),

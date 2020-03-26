@@ -29,11 +29,8 @@ create table Leader(
 );
 
 /* information about each dive site*/ 
-create table DiveSite(
+create table DiveSiteInfo(
 	name text primary key,
-	openWater boolean not null, 
-	caveDive boolean not null,
-	deeperDive boolean not null,
 	dayMaxima integer not null,
 	nightMaxima integer not null,
 	caveMaxima integer not null, 
@@ -45,6 +42,11 @@ create table DiveSite(
 		(dayMaxima > caveMaxima) and (dayMaxima > deeperMaxima))
 );
 
+create table SiteDiveType(
+	name text,
+	diveType DiveType,
+	primary key(name, diveType)
+);
 /*  table that records all monitors*/ 
 create table Monitor(
 	name text primary key
