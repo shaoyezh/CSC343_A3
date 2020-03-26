@@ -51,7 +51,7 @@ Insert into MonitorPrice values
 ('Maria', 'Crystal Bay', 'afternoon', 'open water', 15),
 ('Maria', 'Bolong', 'morning', 'cave dive', 30),
 ('John', 'Marine', 'morning', 'cave dive', 15),
-('Ben', 'Widow Maker', 'morning', 'cave dive'. 20);
+('Ben', 'Widow Maker', 'morning', 'cave dive',20);
 
 Insert into MonitorRate values
 (1, 2),
@@ -59,7 +59,7 @@ Insert into MonitorRate values
 (3, 5),
 (5, 1),
 (6, 0),
-(7, 2)
+(7, 2);
 
 Insert into Booking values
 (1, 'Micheal', '2019-07-20', 'morning','Widow Maker','open water','Maria'),
