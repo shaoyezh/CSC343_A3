@@ -10,7 +10,7 @@ Insert into DiveSite values
 -- ('Crystal Bay', false, false, true, true),
 -- ('Bolong', true, false, false, true);
 Insert into Diver values
-('Micheal', 'PADI', '1967-03-15','michael@dm.org'),
+('Micheal', 'PADI', '1967-03-15','micheal@dm.org'),
 ('Dwight', 'PADI', '1970-04-04', 'dwight@dm.org'),
 ('Jim', 'PADI', '1980-10-10', 'jim@dm.org'),
 ('Pam','CMAS', '1990-10-20', 'pam@dm.org'),
@@ -53,6 +53,9 @@ Insert into MonitorPrice values
 ('John', 'Marine', 'morning', 'cave dive', 15),
 ('Ben', 'Widow Maker', 'morning', 'cave dive',20);
 
+Insert into Leader values
+('Micheal', '11111'),
+('Andy', '22222');
 
 Insert into Booking values
 (1, 'Micheal', '2019-07-20', 'morning','Widow Maker','open water','Maria'),
