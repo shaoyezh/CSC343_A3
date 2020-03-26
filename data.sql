@@ -19,10 +19,10 @@ Insert into Diver values
 ('Oscar','PADI', '1973-10-10', 'oscar@dm.org');
 
 Insert into DiveSiteServicesFee values
-('Marine', 5, , 10, ),
-('Widow Maker', 3, , 5, ),
-('Crystal Bay', , ,5, 20), 
-('Bolong', 10, , , 30);
+('Marine',5,0,10,0),
+('Widow Maker', 3, 0, 5,0),
+('Crystal Bay', 0, 0,5, 20), 
+('Bolong', 10, 0,0, 30);
 
 Insert into SiteRate values
 ('Jim', 'Marine', 3),
