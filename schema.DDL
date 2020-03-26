@@ -52,7 +52,7 @@ create table Monitor(
 
 create table MonitorPrice(
 	name text references Monitor,
-	site text references DiveSite(name)
+	site text references DiveSite(name),
 	timing TimePeriod not null,
 	diveType DiveType not null,
 	price Real not null,
@@ -102,7 +102,7 @@ create table DiveSiteFreeServices(
 /*  all booking information*/ 
 create table Booking(
 	ID integer primary key,
-	leader references Leader(name),
+	leader text references Leader(name),
 	day date,
 	timePeriod TimePeriod,
 	site text references DiveSite(name),
@@ -114,15 +114,15 @@ create table Booking(
 create table DiveEvent(
 	diver text references Diver(name),
 	bookingID integer references Booking(ID),
-	primary key (diverID, bookingID)
+	primary key (diver, bookingID)
 );
 
 /*  Rate of site*/ 
 create table SiteRate(
-	name text primary key references Diver(name),
+	diver text references Diver(name),
 	site text not null,
 	siteRate int not null,
-	primary key(diverID, site), 
+	primary key(diver, site), 
 	check (siteRate >= 0 and siteRate <= 5)
 );
 
