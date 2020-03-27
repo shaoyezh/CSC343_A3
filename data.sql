@@ -32,10 +32,10 @@ Insert into Diver values
 ('John','NAUI', '1970-01-01', 'John@dm.org');
 
 Insert into DiveSiteServicesFee values
-('Marine',5,0,10,0),
-('Widow Maker', 3, 0, 5,0),
-('Crystal Bay', 0, 0,5, 20), 
-('Bolong', 10, 0,0, 30);
+('mask',5,3,0,10),
+('regulator', 0, 0, 0,0),
+('fins', 10, 5,5, 0), 
+('divecomputer', 0, 0,20, 30);
 
 Insert into SiteRate values
 ('Jim', 'Marine', 3),
