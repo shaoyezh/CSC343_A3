@@ -12,7 +12,7 @@ create domain TimePeriod as text
 
 /*  user define type for dive type */ 
 create domain DiveType as text
-	check (value in ('open water', 'cave dive', 'deeper than 30 meters'));
+	check (value in ('open water', 'cave dive', 'deep water'));
 
 /*  table that records all divers*/ 
 create table Diver(
@@ -44,8 +44,9 @@ create table DiveSite(
 
 create table SiteDiveType(
 	name text references DiveSite(name),
-	diveType DiveType,
-	primary key(name, diveType)
+	diveType text not null,
+	primary key(name, diveType),
+	check (diveType in ('open water', 'cave dive', 'deep water'))
 );
 /*  table that records all monitors*/ 
 create table Monitor(
@@ -56,19 +57,20 @@ create table MonitorPrice(
 	name text references Monitor,
 	site text references DiveSite(name),
 	timing TimePeriod not null,
-	diveType DiveType not null,
+	diveType text not null,
 	price Real not null,
-	primary key (name,site, timing, diveType)
+	primary key (name,site, timing, diveType),
+	check (diveType in ('open water', 'cave dive', 'deep water'))
 );
 
 /* table that tells the capacity of each monitor.*/ 
 create table MonitorCapacity(
 	name text references Monitor,
-	openWater int not null,
-	cave int not null, 
-	deepWater int not null,
-	primary key (name),
-	check (openWater >= 0 and cave >= 0 and deepWater >= 0)
+	diveType text not null,
+	capacity int,
+	primary key (name, diveType),
+	check (capacity >= 0),
+	check (diveType in ('open water', 'cave dive', 'deep water'))
 );
 
 create table SiteMonitor(
@@ -113,8 +115,9 @@ create table Booking(
 	day date not null,
 	timePeriod TimePeriod not null,
 	site text references DiveSite(name),
-	diveType DiveType,
-	monitor text references Monitor(name)
+	diveType text not null,
+	monitor text references Monitor(name),
+	check (diveType in ('open water', 'cave dive', 'deep water'))
 );
 
 create table BookExtraService(

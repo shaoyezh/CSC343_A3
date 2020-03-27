@@ -7,10 +7,10 @@ Insert into DiveSite values
 Insert into SiteDiveType values
 ('Marine', 'open water'),
 ('Marine', 'cave dive'),
-('Marine', 'deeper than 30 meters'),
+('Marine', 'deep water'),
 ('Widow Maker', 'open water'),
 ('Widow Maker', 'cave dive'),
-('Widow Maker', 'deeper than 30 meters'),
+('Widow Maker', 'deep water'),
 ('Crystal Bay', 'open water'),
 ('Crystal Bay', 'cave dive'),
 ('Bolong', 'open water');
@@ -58,9 +58,15 @@ Insert into Monitor values
 ('Ben');
  
 Insert into MonitorCapacity values
-('Maria',10,5,5),
-('John', 0,15,0),
-('Ben', 15, 5, 5);
+('Maria','open water',10),
+('Maria','cave dive',5),
+('Maria','deep water',5),
+('John', 'open water', 0),
+('John', 'cave dive', 15),
+('John', 'deep water', 0),
+('Ben', 'open water', 15),
+('Ben', 'cave dive', 5),
+('Ben', 'deep water', 5);
 
 Insert into MonitorPrice values
 ('Maria', 'Marine', 'afternoon', 'cave dive', 25),
