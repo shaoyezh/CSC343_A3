@@ -79,6 +79,13 @@ Insert into Booking values
 (6, 'Andy', '2019-07-23', 'morning', 'Widow Maker', 'cave dive', 'Ben'),
 (7, 'Andy', '2019-07-24', 'morning', 'Widow Maker', 'cave dive', 'Ben');
 
+Insert into BookExtraService values
+(1, 'mask'),
+(2,'mask'),
+(2, 'fins'),
+(3,'mask'),
+(5,'fins');
+
 Insert into SiteMonitor values
 ('Marine', 'Maria'),
 ('Widow Maker', 'Maria'),

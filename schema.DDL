@@ -118,6 +118,12 @@ create table Booking(
 	monitor text references Monitor(name)
 );
 
+create table BookExtraService(
+	bookingID integer references booking(ID),
+	services text,
+	primary key(bookingID, services)
+);
+
 /* table about how divers of each diving events are grouped. */ 
 create table DiveEvent(
 	diver text references Diver(name),
