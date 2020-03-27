@@ -36,8 +36,8 @@ Insert into DiveSiteServicesFee values
 ('Widow Maker', 'mask', 3),
 ('Bolong', 'mask', 10),
 ('Marine', 'fins', 10),
-('Marine', 'fins', 5),
-('Marine', 'fins', 5),
+('Widow Maker', 'fins', 5),
+('Crystal Bay', 'fins', 5),
 ('Crystal Bay', 'divecomputer', 20),
 ('Bolong', 'divecomputer', 30)
 ;

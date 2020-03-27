@@ -92,7 +92,8 @@ create table DiveSiteServicesFee(
 	site text references DiveSite(name),
 	service text,
 	price int,
-	check (service in ('mask', 'regulator', 'fins','divecomputer'))
+	check (service in ('mask', 'regulator', 'fins','divecomputer')),
+	primary key(site, service)
 	);
 
 /*  THe free serviese provided */ 
