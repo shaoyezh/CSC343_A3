@@ -94,7 +94,7 @@ create table DiveSiteServicesFee(
 	Widow_maker integer, 
 	Crystal_bay integer, 
 	Bolong integer,
-	check (service in ('mask', 'regulator', 'fins','diveComputer'))
+	check (service in ('mask', 'regulator', 'fins','divecomputer'))
 	);
 
 /*  THe free serviese provided */ 
