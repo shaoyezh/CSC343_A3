@@ -26,7 +26,10 @@ Insert into Diver values
 ('Pam','CMAS', '1990-10-20', 'pam@dm.org'),
 ('Andy','PADI', '1973-10-10', 'andy@dm.org'),
 ('Phyllis','PADI', '1973-10-10', 'Phyllis@dm.org'),
-('Oscar','PADI', '1973-10-10', 'oscar@dm.org');
+('Oscar','PADI', '1973-10-10', 'oscar@dm.org'),
+('Ben','NAUI', '1970-01-01', 'ben@dm.org'),
+('Maria','NAUI', '1970-01-01', 'Maria@dm.org'),
+('John','NAUI', '1970-01-01', 'John@dm.org');
 
 Insert into DiveSiteServicesFee values
 ('Marine',5,0,10,0),

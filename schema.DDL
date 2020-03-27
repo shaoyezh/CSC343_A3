@@ -49,7 +49,7 @@ create table SiteDiveType(
 );
 /*  table that records all monitors*/ 
 create table Monitor(
-	name text primary key
+	name text primary key references Diver(name)
 );
 
 create table MonitorPrice(
