@@ -89,12 +89,10 @@ create table SiteMonitor(
 /*  Price for each additional services provided by sites,
 charge 0 if that service is not provided*/ 
 create table DiveSiteServicesFee(
-	service text primary key, 
-	Marine integer, 
-	Widow_maker integer, 
-	Crystal_bay integer, 
-	Bolong integer,
-	check (service in ('mask', 'regulator', 'fins','divecomputer'))
+	site text references DiveSite(name),
+	service text,
+	price int,
+	check (service in ('mask', 'regulator', 'fins','divecomputer')),
 	);
 
 /*  THe free serviese provided */ 
