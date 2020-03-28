@@ -10,10 +10,6 @@ create domain Certificate as varchar(4)
 create domain TimePeriod as text
 	check (value in ('morning', 'afternoon', 'night'));
 
-/*  user define type for dive type */ 
-create domain DiveType as text
-	check (value in ('open water', 'cave dive', 'deep water'));
-
 /*  table that records all divers*/ 
 create table Diver(
 	name text primary key not null, 
@@ -42,17 +38,21 @@ create table DiveSite(
 		(dayMaxima > caveMaxima) and (dayMaxima > deeperMaxima))
 );
 
+-- information about what kind of dive type each site provide.
 create table SiteDiveType(
 	name text references DiveSite(name),
 	diveType text not null,
 	primary key(name, diveType),
 	check (diveType in ('open water', 'cave dive', 'deep water'))
 );
+
 /*  table that records all monitors*/ 
 create table Monitor(
 	name text primary key references Diver(name)
 );
 
+-- records the monitor price at different time of day 
+-- and different site
 create table MonitorPrice(
 	name text references Monitor,
 	site text references DiveSite(name),
@@ -73,6 +73,7 @@ create table MonitorCapacity(
 	check (diveType in ('open water', 'cave dive', 'deep water'))
 );
 
+-- table that records the site that monitor has privilege with. 
 create table SiteMonitor(
 	site text references DiveSite(name),
 	monitor text references Monitor,
@@ -117,9 +118,11 @@ create table Booking(
 	site text references DiveSite(name),
 	diveType text not null,
 	monitor text references Monitor(name),
+	unique (ID, leaderm day, timePeriod),
 	check (diveType in ('open water', 'cave dive', 'deep water'))
 );
 
+-- holds the booking informatino of additional services
 create table BookExtraService(
 	bookingID integer references booking(ID),
 	services text,
@@ -132,6 +135,7 @@ create table DiveEvent(
 	bookingID integer references Booking(ID),
 	primary key (diver, bookingID)
 );
+
 
 /*  Rate of site*/ 
 create table SiteRate(
