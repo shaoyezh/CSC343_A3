@@ -98,7 +98,7 @@ Insert into BookExtraService values
 (5,'fins');
 
 Insert into SiteMonitor values
-('Marine', 'Maria'),
+-- ('Marine', 'Maria'),
 ('Widow Maker', 'Maria'),
 ('Crystal Bay', 'Maria'),
 ('Marine', 'John'),

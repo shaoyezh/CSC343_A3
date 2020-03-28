@@ -24,17 +24,17 @@ where name = monitor;
 create view openwater as 
 select count(distinct site) as openwater 
 from SiteMonitorCapacity
-where openwater != 0;
+where capacity != 0 and divetype = 'open water';
 
 create view cavedive as 
 select count(distinct site) as cave 
 from SiteMonitorCapacity
-where cave != 0;
+where  capacity!= 0 and divetype = 'cave dive';
 
 create view deepwater as 
 select count(distinct site) as deepwater
 from SiteMonitorCapacity
-where deepwater != 0;
+where capacity != 0 and divetype = 'deep water';
 
 Insert into q1
 select * from openwater, cavedive, deepwater;
